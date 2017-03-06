@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %title Redis
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to "Blog App", "#", class: "navbar-brand"
+        #bs-example-navbar-collapse-1.navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li.active= link_to "Articles", root_path
+    .container-fluid
+      - flash.each do |name, msg|
+        %div{:class => "alert alert-#{"#{name}"}"}
+          %a.close{"data-dismiss" => "alert", :href => "#"} ×
+          = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+      .row
+        .col-md-10.col-md-offset-1
+          .col-md-8
+            = yield
+          .col-md-4
+            = yield :sidebar

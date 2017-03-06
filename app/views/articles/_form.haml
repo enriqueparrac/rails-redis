@@ -1,0 +1,27 @@
+.row
+  .col-md-12
+    = form_for(@article, :html => {class: "form-horizontal", role: "form"}) do |f|
+      - if @article.errors.any?
+        .panel.panel-danger.col-md-offset-1
+          .panel-heading
+            %h2.panel-title
+              = pluralize(@article.errors.count, "error")
+              prohibited this article from being saved:
+            .panel-body
+              %ul
+                - @article.errors.full_messages.each do |msg|
+                  %li
+                    = msg
+      .form-group
+        .control-label.col-md-1
+          = f.label :title
+        .col-md-11
+          = f.text_field :title, class: 'form-control', placeholder: 'Title of article', autofocus: true
+      .form-group
+        .control-label.col-md-1
+          = f.label :body
+        .col-md-11
+          = f.text_area :body, rows: 10, class: 'form-control', placeholder: 'Body of article'
+      .form-group
+        .col-md-offset-1.col-md-11
+          = f.submit class: 'btn btn-primary btn-lg pull-right'

@@ -1,0 +1,14 @@
+%h1 
+	Article Listing
+%h3 
+	Development with Rails 4, Redis, Haml Sass and Bootstrap
+
+= link_to "New Article", new_article_path, class: "btn btn-success btn-lg", id: "new-article-btn"
+
+%ul#articles
+	- @articles.each do |art|
+		%li 
+			%h3
+				= link_to art["title"], article_path(art)
+			%p
+				= art["body"]
